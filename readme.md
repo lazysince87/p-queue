@@ -58,6 +58,12 @@ npm install p-queue
 
 This runs one task at a time. Set `concurrency` to 4 to run four at the same time.
 
+The example uses [`got`](https://github.com/sindresorhus/got) to make HTTP requests. Install it in addition to `p-queue`:
+
+```sh
+npm install got
+```
+
 ```js
 import PQueue from 'p-queue';
 import got from 'got';
@@ -75,6 +81,26 @@ queue.add(async () => {
 });
 
 await queue.onIdle();
+```
+
+## Development
+
+Requires Node.js 22 or later.
+
+```sh
+git clone https://github.com/sindresorhus/p-queue.git
+cd p-queue
+npm install
+npm run build
+npm test
+```
+
+Build before importing the package from a source checkout, as its entry point is `dist/index.js`.
+
+`npm test` runs XO, the runtime tests in `test/`, a TypeScript build, and the type tests in `test-d/` with nz. To run only the priority queue tests:
+
+```sh
+node --import=tsx/esm --test test/priority-queue.ts
 ```
 
 ## API
